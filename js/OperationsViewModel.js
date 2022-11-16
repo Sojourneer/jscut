@@ -445,6 +445,12 @@ function OperationsViewModel(miscViewModel, options, svgViewModel, materialViewM
         self.operations.remove(operation);
     }
 
+    self.removeAllOperations = function () {
+        var ops = self.operations();
+        for (var i = ops.length-1; i >= 0; --i)
+            self.removeOperation(ops[i]);
+	}
+
     self.clickOnSvg = function (elem) {
         if (elem.attr("class") == "combinedGeometry" || elem.attr("class") == "toolPath")
             return true;

@@ -214,9 +214,11 @@ along with jscut.  If not, see <http://www.gnu.org/licenses/>.
                                     <td><label for="pxPerInch">px per inch</label>
                                     <td><input type="number" step="any" id="pxPerInch" data-bind="value: svgViewModel.pxPerInch">
                             </table>
+							
+                            <button id="deleteOperations" class="btn" data-bind="click: removeAllOperations">Delete Operations</button>
                             <div style="display: inline-block">
                                 <button id="createOperationButton" class="btn btn-default" data-bind="click: addOperation, enable:selectionViewModel.selNumSelected()>0">Create Operation</button>
-                            </div>
+							</div>
                         </div>
                         <div style="display:table">
                             <div data-bind="foreach: {data: operations, afterRender: hookupOperationPopovers}">
@@ -294,6 +296,7 @@ along with jscut.  If not, see <http://www.gnu.org/licenses/>.
                         </div>
                     </div>
                 </div>
+
                 <!-- tabs -->
                 <div class="panel panel-default" id="Tabs">
                     <div class="panel-heading">

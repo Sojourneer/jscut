@@ -396,8 +396,7 @@ function toJson() {
         'material': materialViewModel.toJson(),
         'curveToLineConversion': selectionViewModel.toJson(),
         'tool': toolModel.toJson(),
-        'operations': operationsViewModel.toJson(),
-        'operations': operationsViewModel.toJson(), // DJH Note
+        'operations': operationsViewModel.toJson(), // DJH This is where the operation information is store in the settings
         'tabs': tabsViewModel.toJson(),
         'gcodeConversion': gcodeConversionViewModel.toJson(),
     };
