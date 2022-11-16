@@ -133,6 +133,8 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
                 "\r\n; Paths:        " + op.toolPaths().length +
                 "\r\n; Direction:    " + op.direction() +
                 "\r\n; Cut Depth:    " + cutDepth +
+                "\r\n; Tool diameter:" + toolModel.diameter() +
+                "\r\n; Tool angle:   " + toolModel.angle() +
                 "\r\n; Pass Depth:   " + passDepth +
                 "\r\n; Plunge rate:  " + plungeRate +
                 "\r\n; Cut rate:     " + cutRate +
