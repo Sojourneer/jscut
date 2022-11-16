@@ -233,6 +233,7 @@ function loadSvg(alert, filename, content) {
     if(alert)
         alert.remove();
     showAlert("loaded " + filename, "alert-success");
+	document.title = "jscut " + filename;
     tutorial(2, 'Click 1 or more objects.');
 }
 
