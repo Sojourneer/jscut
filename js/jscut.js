@@ -397,6 +397,7 @@ function toJson() {
         'curveToLineConversion': selectionViewModel.toJson(),
         'tool': toolModel.toJson(),
         'operations': operationsViewModel.toJson(),
+        'operations': operationsViewModel.toJson(), // DJH Note
         'tabs': tabsViewModel.toJson(),
         'gcodeConversion': gcodeConversionViewModel.toJson(),
     };

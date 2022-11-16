@@ -52,7 +52,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
         self.generateGcode();
     }
 
-    self.zeroCenter = function () {
+    self.zeroCenter = function () { //Note
         allowGen = false;
         self.offsetX(-self.unitConverter.fromInch((operationsViewModel.minX() + operationsViewModel.maxX()) / 2 / jscut.priv.path.inchToClipperScale));
         self.offsetY(-self.unitConverter.fromInch(-(operationsViewModel.minY() + operationsViewModel.maxY()) / 2 / jscut.priv.path.inchToClipperScale));
@@ -194,6 +194,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
         return {
             'units': self.units(),
             'gcodeFilename': self.gcodeFilename(),
+			'returnTo00':  self.returnTo00(),
             'offsetX': self.offsetX(),
             'offsetY': self.offsetY(),
         };
@@ -208,6 +209,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
         if (json) {
             f(json.units, self.units);
             f(json.gcodeFilename, self.gcodeFilename);
+            f(json.returnTo00, self.returnTo00);
             f(json.offsetX, self.offsetX);
             f(json.offsetY, self.offsetY);
         }
