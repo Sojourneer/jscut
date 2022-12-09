@@ -14,6 +14,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with jscut.  If not, see <http://www.gnu.org/licenses/>.
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) { 
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
 
 function GcodeConversionViewModel(options, miscViewModel, materialViewModel, toolModel, operationsViewModel, tabsViewModel) {
     "use strict";
@@ -114,7 +125,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
             gcode += "G20         ; Set units to inches\r\n";
         else
             gcode += "G21         ; Set units to mm\r\n";
-        gcode += "G90         ; Absolute positioning\r\n";
+        gcode += "G90         ; Absolute positioning. X {0}:{1}, Y {2}:{3}\r\n".format(self.minX(), self.maxX(), self.minY(), self.maxY());
         gcode += "G1 Z" + safeZ + " F" + rapidRate + "      ; Move to clearance level\r\n"
 
         for (var opIndex = 0; opIndex < ops.length; ++opIndex) {
