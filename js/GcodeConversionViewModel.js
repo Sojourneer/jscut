@@ -38,6 +38,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
     self.offsetX = ko.observable(0);
     self.offsetY = ko.observable(0);
     self.returnTo00 = ko.observable(false);
+    self.spindleControl = ko.observable(false);
 
     self.unitConverter.add(self.offsetX);
     self.unitConverter.add(self.offsetY);
@@ -151,7 +152,11 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
                 "\r\n; Cut rate:     " + cutRate +
                 "\r\n;\r\n";
 
-            gcode += jscut.priv.cam.getGcode({
+			console.log(self.spindleControl());
+			if (self.spindleControl())
+				gcode += "S" + self.spindleControl() + " M03\r\n";
+            
+			gcode += jscut.priv.cam.getGcode({
                 paths:          op.toolPaths(),
                 ramp:           op.ramp(),
                 scale:          scale,
@@ -199,6 +204,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
     self.offsetX.subscribe(self.generateGcode);
     self.offsetY.subscribe(self.generateGcode);
     self.returnTo00.subscribe(self.generateGcode);
+	self.spindleControl.subscribe(self.generateGcode),
     toolModel.angle.subscribe(self.generateGcode);
 
     self.toJson = function () {
@@ -206,6 +212,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
             'units': self.units(),
             'gcodeFilename': self.gcodeFilename(),
 			'returnTo00':  self.returnTo00(),
+			'spindleControl': self.spindleControl(),
             'offsetX': self.offsetX(),
             'offsetY': self.offsetY(),
         };
@@ -221,6 +228,7 @@ function GcodeConversionViewModel(options, miscViewModel, materialViewModel, too
             f(json.units, self.units);
             f(json.gcodeFilename, self.gcodeFilename);
             f(json.returnTo00, self.returnTo00);
+			if(json.spindleControl, self.spindleControl);
             f(json.offsetX, self.offsetX);
             f(json.offsetY, self.offsetY);
         }
